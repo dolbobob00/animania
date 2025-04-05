@@ -15,4 +15,8 @@ class AppColors {
   // Secondaries Theme Colors
   static const Color secondaryLightGreen = Color(0xFFD5ED9F);
   static const Color secondaryGreen = Color(0xFF00712D);
+
+  // Background colors #FFFBE6
+  static const Color orangeBackground = Color(0xFFFFFBE6);
+  
 }

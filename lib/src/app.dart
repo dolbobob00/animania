@@ -10,8 +10,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+      ],
       child: BlocBuilder<ThemeCubit, AppThemeType>(
         builder: (context, themeType) {
           return MaterialApp.router(

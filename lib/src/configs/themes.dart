@@ -119,7 +119,7 @@ class AppThemes {
       secondary: AppColors.orangeLight,
       surface: AppColors.orangePale,
     ),
-    scaffoldBackgroundColor: AppColors.orangeBg,
+    scaffoldBackgroundColor: AppColors.orangeBackground,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.orangePrimary,
       foregroundColor: Colors.white,

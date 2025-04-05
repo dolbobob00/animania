@@ -1,8 +1,11 @@
 import 'package:animania/src/configs/app_colors.dart';
+import 'package:animania/src/presentation/widgets/cards/food_card.dart';
+import 'package:animania/src/presentation/widgets/cards/listview_food_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubits/theme_cubit.dart';
 import '../../../data/constants.dart';
+import '../../widgets/banner/banner.dart';
 import '../../widgets/navigation/search_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -108,45 +111,41 @@ class HomePage extends StatelessWidget {
                   .toList(),
             ),
           ),
+          SliverToBoxAdapter(child: CustomBanner()),
+          SliverAppBar(
+            pinned: true,
+            toolbarHeight: 50 + MediaQuery.sizeOf(context).height * 0.015,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: ListviewFoodCategories(),
+            ),
+          ),
           SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'assets/TEMP/banner.png',
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Order,\nRelax and \nEnjoy with foody!',
-                            style: themeof.textTheme.titleMedium!.copyWith(
-                              fontSize: 20,
-                              color: themeof.colorScheme.background,
-                            ),
-                          ),
-                          Divider(
-                            endIndent: MediaQuery.sizeOf(context).width * 0.6,
-                            thickness: 2,
-                          ),
-                          Text(
-                            'Your Favourite Meals Just One\n Click Away.',
-                            style: themeof.textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recommended For You',
+                        style: themeof.textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
+                      Text(
+                        'See More',
+                        style: themeof.textTheme.titleMedium!.copyWith(
+                            fontSize: 18,
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ],
