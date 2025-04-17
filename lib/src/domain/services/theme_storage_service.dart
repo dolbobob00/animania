@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import '../constants.dart';
+import '../../data/constants.dart';
 
 class ThemeStorageService {
   static const String _boxName = 'theme_box';

@@ -1,3 +1,6 @@
+import 'package:animania/src/domain/services/geolocation_service.dart';
+import 'package:animania/src/presentation/cubits/geolocation_cubit/cubit/geolocation_cubit.dart';
+import 'package:animania/src/presentation/cubits/user_info_cubit/cubit/user_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'configs/routes.dart';
@@ -14,6 +17,14 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => GeolocationCubit(
+            context.read<IGeolocationService>(),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => UserInfoCubit(),
         ),
       ],
       child: BlocBuilder<ThemeCubit, AppThemeType>(

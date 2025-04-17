@@ -1,18 +1,7 @@
 enum AppThemeType {
-  orange,
-  purple,
-  // Add more themes here as needed
-}
+  orange('Orange Theme'),
+  purple('Purple Theme');
 
-extension AppThemeTypeExtension on AppThemeType {
-  String get name {
-    switch (this) {
-      case AppThemeType.orange:
-        return 'Orange';
-      case AppThemeType.purple:
-        return 'Purple';
-      default:
-        return 'Unknown';
-    }
-  }
+  final String name;
+  const AppThemeType(this.name);
 }

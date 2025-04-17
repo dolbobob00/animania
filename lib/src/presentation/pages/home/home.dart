@@ -1,8 +1,13 @@
 import 'package:animania/src/configs/app_colors.dart';
+import 'package:animania/src/presentation/widgets/appbar/sliver_appbar.dart';
+import 'package:animania/src/presentation/widgets/cards/big_food_card.dart';
 import 'package:animania/src/presentation/widgets/cards/food_card.dart';
 import 'package:animania/src/presentation/widgets/cards/listview_food_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import '../../../data/models/banner_model.dart';
+import '../../../data/models/food_model.dart';
 import '../../cubits/theme_cubit.dart';
 import '../../../data/constants.dart';
 import '../../widgets/banner/banner.dart';
@@ -14,106 +19,33 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeof = Theme.of(context);
+    final foodList = List.generate(
+      8,
+      (index) => FoodModel(
+        id: index.toString(),
+        name: 'Food $index',
+        description: 'Description of Food $index',
+        imageUrl:
+            'https://static.tildacdn.com/tild6330-3538-4965-a164-383631626636/Pancake_Strawberry_B.jpg',
+        price: 10.0 + index,
+      ),
+    );
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 91,
-            floating: true,
-            backgroundColor: Colors.transparent,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: BorderRadius.circular(25),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.23),
-                    blurRadius: 15.1,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: FlexibleSpaceBar(
-                  background: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomIconButton(
-                        onTap: () {},
-                        icon: Icon(
-                          Icons.search,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Location',
-                              style: themeof.textTheme.bodySmall,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  Icons.location_on,
-                                  color: AppColors.secondaryGreen,
-                                  size: 20,
-                                ),
-                                Text(
-                                  '189 St, Houston, NY',
-                                  style: themeof.textTheme.bodyMedium!.copyWith(
-                                      color: themeof.colorScheme.background),
-                                ),
-                                Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 24,
-                                  color: themeof.colorScheme.background,
-                                  shadows: [
-                                    Shadow(
-                                      blurRadius: 4,
-                                      offset: Offset(0, 4),
-                                      color: Colors.black.withOpacity(0.25),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      CustomIconButton(
-                        onTap: () {},
-                        icon: Icon(
-                          Icons.person,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+          MySliverAppBar(),
           SliverToBoxAdapter(
-            child: PopupMenuButton<AppThemeType>(
-              icon: const Icon(Icons.palette),
-              onSelected: (AppThemeType theme) {
-                context.read<ThemeCubit>().changeTheme(theme);
-              },
-              itemBuilder: (context) => AppThemeType.values
-                  .map((theme) => PopupMenuItem(
-                        value: theme,
-                        child: Text(theme.name),
-                      ))
-                  .toList(),
+            child: CustomBanner(
+              banner: BannerModel(
+                imageUrl: 'assets/TEMP/banner.png',
+                title: 'Order,\nRelax and \nEnjoy with foody!',
+                subtitle: 'Your Favourite Meals Just One\nClick Away.',
+                id: 1,
+                link: 'info',
+              ),
             ),
           ),
-          SliverToBoxAdapter(child: CustomBanner()),
           SliverAppBar(
-            pinned: true,
             toolbarHeight: 50 + MediaQuery.sizeOf(context).height * 0.015,
             backgroundColor: Colors.transparent,
             flexibleSpace: FlexibleSpaceBar(
@@ -146,6 +78,33 @@ class HomePage extends StatelessWidget {
                   ),
                 )
               ],
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            sliver: SliverGrid.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8,
+                mainAxisExtent: 200,
+                crossAxisSpacing: 8,
+              ),
+              itemBuilder: (context, index) {
+                return BigFoodCard(
+                  foodModel: foodList[index],
+                );
+              },
+              itemCount: 8,
+            ),
+          ),
+          SliverFillRemaining(
+            child: Center(
+              child: Text(
+                'No more items',
+                style: themeof.textTheme.headlineSmall!.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ],

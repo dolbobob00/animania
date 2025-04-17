@@ -1,10 +1,13 @@
+import 'package:animania/src/data/models/banner_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../buttons/custom_button.dart';
 
 class CustomBanner extends StatelessWidget {
-  const CustomBanner({super.key});
-
+  const CustomBanner({super.key, required this.banner});
+  //! In future use cubit banner to get data from API
+  final BannerModel banner;
   @override
   Widget build(BuildContext context) {
     final themeof = Theme.of(context);
@@ -13,7 +16,9 @@ class CustomBanner extends StatelessWidget {
       child: Stack(
         children: [
           Image.asset(
-            'assets/TEMP/banner.png',
+            banner.imageUrl,
+            width: MediaQuery.sizeOf(context).width,
+            fit: BoxFit.cover,
           ),
           Align(
             alignment: Alignment.topLeft,
@@ -24,7 +29,7 @@ class CustomBanner extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Order,\nRelax and \nEnjoy with foody!',
+                    banner.title ?? '',
                     style: themeof.textTheme.titleMedium!.copyWith(
                       fontSize: 20,
                       height: 0.9,
@@ -36,7 +41,7 @@ class CustomBanner extends StatelessWidget {
                     thickness: 2,
                   ),
                   Text(
-                    'Your Favourite Meals Just One\n Click Away.',
+                    banner.subtitle ?? '',
                     style: themeof.textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w300,
                     ),
@@ -44,7 +49,21 @@ class CustomBanner extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: CustomButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        try {
+                          context.pushNamed(
+                            banner.link,
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Error caught, sorry..',
+                              ),
+                            ),
+                          );
+                        }
+                      },
                       height: 25,
                       text: 'Order Now',
                       prefix: Icon(Icons.shopping_cart),

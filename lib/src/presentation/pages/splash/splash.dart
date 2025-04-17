@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
     ).then(
       (value) {
         context.goNamed(
-          'home',
+          'registration',
         );
       },
     );
@@ -42,7 +42,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
               const SizedBox(height: 24),
               Text(
-                'FOODY',
+                'DeFOOD',
                 style: themeof.textTheme.displayLarge?.copyWith(
                   shadows: [
                     Shadow(

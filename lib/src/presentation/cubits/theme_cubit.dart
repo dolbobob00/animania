@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/services/theme_storage_service.dart';
+import '../../domain/services/theme_storage_service.dart';
 import '../../data/constants.dart';
 
 class ThemeCubit extends Cubit<AppThemeType> {
