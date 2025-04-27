@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
     final foodList = List.generate(
       8,
       (index) => FoodModel(
+        category: 'Food',
         id: index.toString(),
         name: 'Food $index',
         description: 'Description of Food $index',
@@ -34,6 +35,13 @@ class HomePage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           MySliverAppBar(),
+          SliverAppBar(
+            toolbarHeight: 25 + MediaQuery.sizeOf(context).height * 0.015,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: ListviewFoodCategories(),
+            ),
+          ),
           SliverToBoxAdapter(
             child: CustomBanner(
               banner: BannerModel(
@@ -43,13 +51,6 @@ class HomePage extends StatelessWidget {
                 id: 1,
                 link: 'info',
               ),
-            ),
-          ),
-          SliverAppBar(
-            toolbarHeight: 50 + MediaQuery.sizeOf(context).height * 0.015,
-            backgroundColor: Colors.transparent,
-            flexibleSpace: FlexibleSpaceBar(
-              background: ListviewFoodCategories(),
             ),
           ),
           SliverToBoxAdapter(
@@ -99,11 +100,35 @@ class HomePage extends StatelessWidget {
           ),
           SliverFillRemaining(
             child: Center(
-              child: Text(
-                'No more items',
-                style: themeof.textTheme.headlineSmall!.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0),
+                    child: Text(
+                      'Popular things',
+                      style: themeof.textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('Activate code'),
+                    onTap: () {},
+                    trailing: Icon(Icons.arrow_forward),
+                  ),
+                  ListTile(
+                    title: const Text('Support team'),
+                    onTap: () {},
+                    trailing: Icon(Icons.arrow_forward),
+                  ),
+                  ListTile(
+                    title: const Text('Send gift card'),
+                    onTap: () {},
+                    trailing: Icon(Icons.arrow_forward),
+                  ),
+                ],
               ),
             ),
           ),

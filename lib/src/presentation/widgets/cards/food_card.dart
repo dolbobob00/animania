@@ -18,7 +18,7 @@ class FoodCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(10),
@@ -49,12 +49,8 @@ class FoodCard extends StatelessWidget {
                       flex: 3,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 8.0,
-                            left: 8.0,
-                            right: 8.0,
-                          ),
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
                           child: CachedNetworkImage(
                             imageUrl: imageUrl,
                             fit: BoxFit.cover,

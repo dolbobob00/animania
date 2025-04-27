@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../widgets/buttons/wt_button.dart';
+import '../../../../widgets/pin_code_input/pin_code_input.dart';
+import '../../../../cubits/user_info_cubit/cubit/user_info.dart';
 
 class SendMsgChoose extends StatelessWidget {
   const SendMsgChoose({super.key});
@@ -39,10 +44,9 @@ class SendMsgChoose extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 18.0, left: 18, right: 18),
+                      padding: const EdgeInsets.only(top: 18.0, left: 18, right: 18),
                       child: Text(
-                        'Send Message',
+                        'Verification Code',
                         style: theme.textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           overflow: TextOverflow.ellipsis,
@@ -51,7 +55,54 @@ class SendMsgChoose extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        'Please enter the verification code sent to your phone number',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: theme.colorScheme.primary.withOpacity(0.7),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  PinCodeInput(
+                    onCompleted: (code) {
+                    //!OnCompleted code
+                      print('Completed: $code');
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  TextButton(
+                    onPressed: () {
+                      //! Handle resend code
+                    },
+                    child: Text(
+                      'Resend Code',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: theme.colorScheme.primary,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
                 ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  padding: const EdgeInsets.all(16.0),
+                  height: 90,
+                  child: WtButton(
+                    onPressed: () {
+                      //! Verify code and navigate to next screen
+                      context.goNamed('home');
+                    },
+                    title: 'Verify',
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                ),
               ),
             ],
           ),

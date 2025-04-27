@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/geolocation_checker.dart';
 import '../widgets/navigation/bottom_nav_bar.dart';
 
 class ScaffoldWithNav extends StatelessWidget {
@@ -13,12 +14,14 @@ class ScaffoldWithNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: currentIndex,
+    return GeolocationChecker(
+      child: Scaffold(
+        body: child,
+        extendBody: true,
+        bottomNavigationBar: BottomNavBar(
+          currentIndex: currentIndex,
+        ),
       ),
-      extendBody: true,
     );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../cubits/restaurant_list_cubit/cubit/restaurant_list_cubit.dart';
 import 'food_card.dart';
 
 class ListviewFoodCategories extends StatelessWidget {
@@ -7,6 +10,7 @@ class ListviewFoodCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubitRestaurants = context.read<RestaurantListCubit>();  
     return ListView(
       scrollDirection: Axis.horizontal,
       children: [
@@ -14,31 +18,47 @@ class ListviewFoodCategories extends StatelessWidget {
           imageUrl:
               'http://images.media-allrecipes.com/userphotos/960x960/6539094.jpg',
           name: 'Veg',
-          onTap: () {},
+          onTap: () {
+            cubitRestaurants.loadRestaurants(
+              category: 'Veg',
+            );
+            context.pushNamed('restaurants');
+          },
         ),
         FoodCard(
           imageUrl:
               'https://i.pinimg.com/originals/20/92/48/2092483fde63dc2c9e3f2a0038c8af1f.jpg',
           name: 'Non-Veg',
-          onTap: () {},
+          onTap: () {
+  cubitRestaurants.loadRestaurants(
+              category: 'Non-Veg',
+            );
+            context.pushNamed('restaurants',);
+          },
         ),
         FoodCard(
           imageUrl:
               'https://static.vecteezy.com/system/resources/previews/030/683/548/non_2x/burgers-high-quality-4k-hdr-free-photo.jpg',
           name: 'Fast Food',
-          onTap: () {},
+          onTap: () {
+            context.pushNamed('restaurants');
+          },
         ),
         FoodCard(
           imageUrl:
               'https://thumbs.dreamstime.com/b/colourful-coctail-blue-background-26757928.jpg',
           name: 'Drinks',
-          onTap: () {},
+          onTap: () {
+            context.pushNamed('restaurants');
+          },
         ),
         FoodCard(
           imageUrl:
               'http://images.media-allrecipes.com/userphotos/960x960/6539094.jpg',
           name: 'Veg',
-          onTap: () {},
+          onTap: () {
+            context.pushNamed('restaurants');
+          },
         ),
         FoodCard(
           imageUrl:

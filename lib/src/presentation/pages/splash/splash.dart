@@ -15,12 +15,13 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
     ).then(
       (value) {
-        context.goNamed(
-          'registration',
-        );
+        if (mounted) {
+          // Always go to registration first
+          context.goNamed('registration');
+        }
       },
     );
   }
@@ -32,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: themeof.colorScheme.primary,
       body: SafeArea(
         child: Center(
-          child: Column(
+          child: Column( 
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(

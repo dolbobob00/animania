@@ -38,7 +38,6 @@ class BottomNavBar extends StatelessWidget {
             ],
           ),
           child: NavigationBar(
-            
             height: 55.3,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -51,21 +50,25 @@ class BottomNavBar extends StatelessWidget {
                   context.goNamed('home');
                   break;
                 case 1:
-                  context.goNamed('cart');
+                  context.goNamed('restaurantsFull');
                   break;
                 case 2:
-                  context.goNamed('map');
+                  context.goNamed('search');
                   break;
                 case 3:
                   context.goNamed('info');
+                  break;
+                case 4:
+                  context.goNamed('profile');
                   break;
               }
             },
             destinations: [
               _buildNavDestination(Icons.home_outlined, Icons.home, 0),
-              _buildNavDestination(Icons.shopping_cart_outlined, Icons.shopping_cart, 1),
-              _buildNavDestination(Icons.map_outlined, Icons.map, 2),
+              _buildNavDestination(Icons.restaurant_outlined, Icons.restaurant, 1),
+              _buildNavDestination(Icons.search_outlined, Icons.search, 2),
               _buildNavDestination(Icons.info_outline, Icons.info, 3),
+              _buildNavDestination(Icons.person_outline, Icons.person, 4),
             ],
           ),
         ),
